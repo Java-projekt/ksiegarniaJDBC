@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.2"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.projekt.controllers.AdminPanelController">
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="10">
+            <Label text="Admin Panel"/>
+            <ListView fx:id="bookListView" />
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Title:"/>
+                <TextField fx:id="titleField" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Author:"/>
+                <TextField fx:id="authorField" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Publisher:"/>
+                <TextField fx:id="publisherField" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="10">
+                <Label text="Price:"/>
+                <TextField fx:id="priceField" />
+            </HBox>
+            <HBox alignment="CENTER" spacing="10">
+                <Button fx:id="addButton" text="Add Book" onAction="#addBook"/>
+                <Button fx:id="modifyButton" text="Modify Book" onAction="#modifyBook"/>
+                <Button fx:id="deleteButton" text="Delete Book" onAction="#deleteBook"/>
+            </HBox>
+        </VBox>
+    </center>
+</BorderPane>

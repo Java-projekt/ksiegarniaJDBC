@@ -8,8 +8,9 @@ public class Client {
     private String phoneNumber;
     private String login;
     private String password;
+    private boolean isAdmin;
 
-    public Client(int id, String firstName, String lastName, String email, String phoneNumber, String login, String password) {
+    public Client(int id, String firstName, String lastName, String email, String phoneNumber, String login, String password, Boolean isAdmin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,6 +18,7 @@ public class Client {
         this.phoneNumber = phoneNumber;
         this.login = login;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public int getId() {
@@ -74,5 +76,12 @@ public class Client {
     public void setPassword(String password) {
         this.password = password;
     }
-}
 
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+}

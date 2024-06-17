@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.example.projekt.modules.Client;
 import org.example.projekt.util.DBUtil;
 
 import java.io.IOException;
@@ -41,12 +42,25 @@ public class LoginController {
             preparedStatement.setString(1, login);
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
-            return resultSet.next();
+            if (resultSet.next()) {
+                int userId = resultSet.getInt("ID_klienta");
+                if (userId == 1) {
+                    // Przekierowanie do panelu administratora
+                    loadAdminPanel();
+                } else {
+                    // Wczytanie panelu księgarni
+                    loadBookstore();
+                }
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
+
 
     private void loadBookstore() {
         try {
@@ -54,6 +68,21 @@ public class LoginController {
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Bookstore");
+            stage.setScene(new Scene(root));
+            stage.show();
+            Stage currentStage = (Stage) loginField.getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void loadAdminPanel() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/projekt/views/admin.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Admin Panel");
             stage.setScene(new Scene(root));
             stage.show();
             Stage currentStage = (Stage) loginField.getScene().getWindow();
