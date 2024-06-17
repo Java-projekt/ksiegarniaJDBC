@@ -2,37 +2,97 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns:fx="http://javafx.com/fxml" fx:controller="org.example.projekt.controllers.RegisterController">
-    <padding>
-        <Insets top="10" right="10" bottom="10" left="10"/>
-    </padding>
-    <hgap>10</hgap>
-    <vgap>10</vgap>
-    <Text text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
-    <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
-
-    <Text text="Last name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-
-    <Text text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-
-    <Text text="Phone number:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-    <TextField fx:id="numberField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-
-    <Text text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-    <TextField fx:id="usernameField" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-
-    <Text text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-
-    <Text text="Confirm Password:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-    <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-
-    <Button text="Register" onAction="#register" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-</GridPane>
+<AnchorPane maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #353B3C;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <GridPane layoutX="165.6" layoutY="76.0" maxHeight="500.0" maxWidth="736.0" minHeight="474.0" minWidth="458.0" prefHeight="486.0" prefWidth="562.0" style="-fx-background-color: #A2999E;" vgap="30.0" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0">
+         <padding>
+            <Insets bottom="50.0" left="20.0" right="50.0" top="30.0" />
+         </padding>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+         </rowConstraints>
+         <children>
+            <Text fill="#28302e" text="Name:" textAlignment="RIGHT" wrappingWidth="124.4686279296875">
+               <font>
+                  <Font name="Book Antiqua" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="nameField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
+            <Text fill="#28302e" text="Last name:" textAlignment="RIGHT" wrappingWidth="126.38574981689453" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Book Antiqua" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="lastNameField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Text fill="#28302e" text="Email:" textAlignment="RIGHT" wrappingWidth="125.85725402832031" GridPane.rowIndex="2">
+               <font>
+                  <Font name="Book Antiqua" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="emailField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Text fill="#28302e" text="Phone number:" textAlignment="RIGHT" wrappingWidth="127.54749298095703" GridPane.rowIndex="3">
+               <font>
+                  <Font name="Book Antiqua" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="numberField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Text fill="#28302e" text="Username:" textAlignment="RIGHT" wrappingWidth="126.66577911376953" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Book Antiqua" size="16.0" />
+               </font>
+            </Text>
+            <TextField fx:id="usernameField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Text fill="#28302e" text="Password:" textAlignment="RIGHT" wrappingWidth="128.09095001220703" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Book Antiqua" size="16.0" />
+               </font>
+            </Text>
+            <PasswordField fx:id="passwordField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Text fill="#28302e" text="Confirm Password: " textAlignment="RIGHT" wrappingWidth="145.3360595703125" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Book Antiqua" size="16.0" />
+               </font>
+            </Text>
+            <PasswordField fx:id="confirmPasswordField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Button alignment="CENTER" onAction="#register" prefHeight="40.0" prefWidth="166.0" style="-fx-background-color: #846A6A;" text="REGISTER" textFill="#eef0f3" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font name="Bookman Old Style" size="21.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+         </children>
+      </GridPane>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" prefHeight="78.0" prefWidth="331.0" text="   R e g i s t e r   " textFill="#eef0f2" underline="true">
+         <font>
+            <Font name="Bodoni MT Bold" size="47.0" />
+         </font>
+      </Label>
+   </children>
+   <padding>
+      <Insets left="50.0" right="50.0" />
+   </padding>
+</AnchorPane>
