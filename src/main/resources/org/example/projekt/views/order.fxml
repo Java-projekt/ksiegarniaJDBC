@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" spacing="30.0" style="-fx-background-color: #353B3C;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.projekt.controllers.OrderAddressController">
+
+    <Label alignment="CENTER" prefHeight="76.0" prefWidth="800.0" text="  E n t e r   y o u r   a d d r e s s :  " textFill="#eef0f2" underline="true">
+      <font>
+         <Font name="Bodoni MT Bold" size="47.0" />
+      </font>
+      <effect>
+         <DropShadow />
+      </effect></Label>
+   <Pane prefHeight="315.0" prefWidth="500.0" style="-fx-background-color: #A2999E;">
+      <children>
+         <HBox layoutX="120.0" layoutY="40.0" prefHeight="50.0" prefWidth="532.0">
+            <children>
+               <Label alignment="CENTER_RIGHT" layoutY="50.0" prefHeight="50.0" prefWidth="525.0" text="CITY:  " textFill="#28302e">
+                  <font>
+                     <Font name="Book Antiqua Bold Italic" size="16.0" />
+                  </font>
+                  <effect>
+                     <Lighting bumpInput="$null">
+                        <light>
+                           <Light.Distant />
+                        </light>
+                     </Lighting>
+                  </effect>
+               </Label>
+            
+                <TextField fx:id="cityField" prefHeight="50.0" prefWidth="715.0" promptText="City">
+                  <effect>
+                     <InnerShadow />
+                  </effect>
+               </TextField>
+            </children>
+         </HBox>
+         <HBox layoutX="120.0" layoutY="133.0" prefHeight="50.0" prefWidth="532.0">
+            <children>
+               <Label alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="525.0" text="POSTAL CODE:  " textFill="#28302e">
+                  <font>
+                     <Font name="Book Antiqua Bold Italic" size="16.0" />
+                  </font>
+                  <effect>
+                     <Lighting>
+                        <bumpInput>
+                           <Shadow />
+                        </bumpInput>
+                        <light>
+                           <Light.Distant />
+                        </light>
+                     </Lighting>
+                  </effect>
+               </Label>
+            
+                      <TextField fx:id="postalCodeField" prefHeight="50.0" prefWidth="715.0" promptText="Postal Code">
+                  <effect>
+                     <InnerShadow />
+                  </effect>
+               </TextField>
+            </children>
+         </HBox>
+         <HBox layoutX="120.0" layoutY="219.0" prefHeight="50.0" prefWidth="532.0">
+            <children>
+               <Label alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="525.0" text="BUILDING NUMBER:  " textFill="#28302e">
+                  <font>
+                     <Font name="Book Antiqua Bold Italic" size="16.0" />
+                  </font>
+                  <effect>
+                     <Lighting bumpInput="$null">
+                        <light>
+                           <Light.Distant />
+                        </light>
+                     </Lighting>
+                  </effect>
+               </Label>
+            
+                            <TextField fx:id="buildingNumberField" prefHeight="50.0" prefWidth="715.0" promptText="Building Number">
+                  <effect>
+                     <InnerShadow />
+                  </effect>
+               </TextField>
+            </children>
+         </HBox>
+         <Region prefHeight="323.0" prefWidth="115.0" style="-fx-background-color: #353B3C;" />
+         <Region layoutX="700.0" prefHeight="323.0" prefWidth="100.0" style="-fx-background-color: #353B3C;" />
+      </children>
+   </Pane>
+
+    <Button onAction="#placeOrder" prefHeight="54.0" prefWidth="238.0" style="-fx-background-color: #846A6A;" text="Place Order" textFill="#eef0f2">
+      <font>
+         <Font name="Bodoni MT" size="28.0" />
+      </font>
+      <effect>
+         <DropShadow />
+      </effect></Button>
+</VBox>

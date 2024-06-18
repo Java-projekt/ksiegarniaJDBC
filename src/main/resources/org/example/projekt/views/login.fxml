@@ -5,6 +5,10 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -17,19 +21,42 @@
                <font>
                   <Font name="Bodoni MT Bold" size="47.0" />
                </font>
+               <effect>
+                  <DropShadow />
+               </effect>
             </Label>
             <AnchorPane layoutX="134.0" layoutY="118.0" prefHeight="382.0" prefWidth="532.0" style="-fx-background-color: #A2999E;">
                <children>
                   <TextField fx:id="loginField" layoutX="145.0" layoutY="64.0" prefHeight="44.0" prefWidth="339.0" promptText="Login" />
-                  <Label alignment="CENTER_RIGHT" layoutX="18.0" layoutY="133.0" prefHeight="38.0" prefWidth="110.0" text="PASSWORD:">
+                  <Label alignment="CENTER_RIGHT" layoutX="18.0" layoutY="133.0" prefHeight="38.0" prefWidth="110.0" text="PASSWORD:" textFill="#28302e">
                      <font>
                         <Font name="Book Antiqua Bold Italic" size="18.0" />
                      </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
                   </Label>
-                  <Label alignment="CENTER_RIGHT" layoutX="41.0" layoutY="67.0" prefHeight="38.0" prefWidth="88.0" text="LOGIN:">
+                  <Label alignment="CENTER_RIGHT" layoutX="41.0" layoutY="67.0" prefHeight="38.0" prefWidth="88.0" text="LOGIN:" textFill="#28302e">
                      <font>
                         <Font name="Book Antiqua Bold Italic" size="18.0" />
                      </font>
+                     <effect>
+                        <Lighting>
+                           <bumpInput>
+                              <Shadow />
+                           </bumpInput>
+                           <light>
+                              <Light.Distant />
+                           </light>
+                        </Lighting>
+                     </effect>
                   </Label>
                   <PasswordField fx:id="passwordField" layoutX="145.0" layoutY="130.0" prefHeight="44.0" prefWidth="339.0" promptText="Password" />
                   <Button layoutX="192.0" layoutY="327.0" onAction="#openRegister" prefHeight="28.0" prefWidth="148.0" style="-fx-background-color: #846A6A;" text="Create Account" textFill="#eef0f3">
@@ -48,12 +75,15 @@
                         <DropShadow />
                      </effect>
                   </Button>
-                  <Label layoutX="195.0" layoutY="302.0" prefHeight="18.0" prefWidth="141.0" text=" You don't have an account? " underline="true">
+                  <Label layoutX="195.0" layoutY="302.0" prefHeight="18.0" prefWidth="141.0" text=" You don't have an account? " textFill="#28302e" underline="true">
                      <font>
                         <Font name="Calibri Italic" size="12.0" />
                      </font>
                   </Label>
                </children>
+               <effect>
+                  <InnerShadow />
+               </effect>
             </AnchorPane>
          </children>
       </AnchorPane>

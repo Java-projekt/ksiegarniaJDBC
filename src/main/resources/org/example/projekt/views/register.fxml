@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -34,45 +35,45 @@
             <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
          </rowConstraints>
          <children>
-            <Text fill="#28302e" text="Name:" textAlignment="RIGHT" wrappingWidth="124.4686279296875">
+            <Text fill="#28302e" text="NAME:" textAlignment="RIGHT" wrappingWidth="202.068603515625">
                <font>
-                  <Font name="Book Antiqua" size="16.0" />
+                  <Font name="Book Antiqua Bold Italic" size="18.0" />
                </font>
             </Text>
             <TextField fx:id="nameField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" />
-            <Text fill="#28302e" text="Last name:" textAlignment="RIGHT" wrappingWidth="126.38574981689453" GridPane.rowIndex="1">
+            <Text fill="#28302e" text="LAST NAME:" textAlignment="RIGHT" wrappingWidth="203.18573760986328" GridPane.rowIndex="1">
                <font>
-                  <Font name="Book Antiqua" size="16.0" />
+                  <Font name="Book Antiqua Bold Italic" size="18.0" />
                </font>
             </Text>
             <TextField fx:id="lastNameField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Text fill="#28302e" text="Email:" textAlignment="RIGHT" wrappingWidth="125.85725402832031" GridPane.rowIndex="2">
+            <Text fill="#28302e" text="EMAIL:" textAlignment="RIGHT" wrappingWidth="201.8572540283203" GridPane.rowIndex="2">
                <font>
-                  <Font name="Book Antiqua" size="16.0" />
+                  <Font name="Book Antiqua Bold Italic" size="18.0" />
                </font>
             </Text>
             <TextField fx:id="emailField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Text fill="#28302e" text="Phone number:" textAlignment="RIGHT" wrappingWidth="127.54749298095703" GridPane.rowIndex="3">
+            <Text fill="#28302e" text="PHONE NUMBER:" textAlignment="RIGHT" wrappingWidth="204.34741973876953" GridPane.rowIndex="3">
                <font>
-                  <Font name="Book Antiqua" size="16.0" />
+                  <Font name="Book Antiqua Bold Italic" size="18.0" />
                </font>
             </Text>
             <TextField fx:id="numberField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Text fill="#28302e" text="Username:" textAlignment="RIGHT" wrappingWidth="126.66577911376953" GridPane.rowIndex="4">
+            <Text fill="#28302e" text="USERNAME:" textAlignment="RIGHT" wrappingWidth="202.66584014892578" GridPane.rowIndex="4">
                <font>
-                  <Font name="Book Antiqua" size="16.0" />
+                  <Font name="Book Antiqua Bold Italic" size="18.0" />
                </font>
             </Text>
             <TextField fx:id="usernameField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Text fill="#28302e" text="Password:" textAlignment="RIGHT" wrappingWidth="128.09095001220703" GridPane.rowIndex="5">
+            <Text fill="#28302e" text="PASSWORD:" textAlignment="RIGHT" wrappingWidth="204.09095001220703" GridPane.rowIndex="5">
                <font>
-                  <Font name="Book Antiqua" size="16.0" />
+                  <Font name="Book Antiqua Bold Italic" size="18.0" />
                </font>
             </Text>
             <PasswordField fx:id="passwordField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Text fill="#28302e" text="Confirm Password: " textAlignment="RIGHT" wrappingWidth="145.3360595703125" GridPane.rowIndex="6">
+            <Text fill="#28302e" text="CONFIRM PASSWORD:" textAlignment="RIGHT" wrappingWidth="204.53616428375244" GridPane.rowIndex="6">
                <font>
-                  <Font name="Book Antiqua" size="16.0" />
+                  <Font name="Book Antiqua Bold Italic" size="18.0" />
                </font>
             </Text>
             <PasswordField fx:id="confirmPasswordField" style="-fx-background-color: #eef0f2;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
@@ -85,11 +86,17 @@
                </effect>
             </Button>
          </children>
+         <effect>
+            <InnerShadow />
+         </effect>
       </GridPane>
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="234.0" prefHeight="78.0" prefWidth="331.0" text="   R e g i s t e r   " textFill="#eef0f2" underline="true">
          <font>
             <Font name="Bodoni MT Bold" size="47.0" />
          </font>
+         <effect>
+            <DropShadow />
+         </effect>
       </Label>
    </children>
    <padding>
