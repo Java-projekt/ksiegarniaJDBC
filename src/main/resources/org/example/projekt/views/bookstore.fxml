@@ -22,7 +22,7 @@
                <DropShadow />
             </effect>
          </Label>
-            <ListView fx:id="recommendedBooksListView" prefHeight="495.0" prefWidth="202.0" style="-fx-background-color: #b4adb1;">
+            <ListView fx:id="recommendedBooksListView" prefHeight="475.0" prefWidth="202.0" style="-fx-background-color: #b4adb1;">
             <effect>
                <InnerShadow />
             </effect></ListView>
