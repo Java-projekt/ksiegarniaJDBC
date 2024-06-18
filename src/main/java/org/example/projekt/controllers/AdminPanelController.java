@@ -4,17 +4,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.util.converter.DoubleStringConverter;
+import javafx.scene.control.Alert.AlertType;
+import javafx.stage.Stage;
 import org.example.projekt.modules.Book;
 import org.example.projekt.util.DBUtil;
-import javafx.scene.control.ListCell;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -55,6 +58,9 @@ public class AdminPanelController {
                 }
             }
         });
+
+        // Add listener for selection changes
+        bookListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> handleBookSelection(newValue));
     }
 
     private void loadBooks() {
@@ -81,63 +87,120 @@ public class AdminPanelController {
 
     @FXML
     public void addBook(ActionEvent event) {
-        String title = titleField.getText();
-        String author = authorField.getText();
-        String publisher = publisherField.getText();
-        double price = Double.parseDouble(priceField.getText());
-
-        String query = "INSERT INTO ksiazki (tytul, autor, wydawnictwo, cena) VALUES (?,?,?,?)";
-        try (Connection connection = DBUtil.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, title);
-            preparedStatement.setString(2, author);
-            preparedStatement.setString(3, publisher);
-            preparedStatement.setDouble(4, price);
-            preparedStatement.executeUpdate();
-            loadBooks();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void modifyBook(ActionEvent event) {
-        Book selectedBook = bookListView.getSelectionModel().getSelectedItem();
-        if (selectedBook!= null) {
+        if (areFieldsFilled()) {
             String title = titleField.getText();
             String author = authorField.getText();
             String publisher = publisherField.getText();
             double price = Double.parseDouble(priceField.getText());
 
-            String query = "UPDATE ksiazki SET tytul =?, autor =?, wydawnictwo =?, cena =? WHERE ID_ksiazki =?";
+            String query = "INSERT INTO ksiazki (tytul, autor, wydawnictwo, cena) VALUES (?,?,?,?)";
             try (Connection connection = DBUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setString(1, title);
                 preparedStatement.setString(2, author);
                 preparedStatement.setString(3, publisher);
                 preparedStatement.setDouble(4, price);
-                preparedStatement.setInt(5, selectedBook.getId());
                 preparedStatement.executeUpdate();
                 loadBooks();
+                clearTextFields(); // Clear text fields after adding a book
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } else {
+            showAlert("All fields must be completed to add a book.");
+        }
+    }
+
+    @FXML
+    public void modifyBook(ActionEvent event) {
+        if (areFieldsFilled()) {
+            Book selectedBook = bookListView.getSelectionModel().getSelectedItem();
+            if (selectedBook != null) {
+                String title = titleField.getText();
+                String author = authorField.getText();
+                String publisher = publisherField.getText();
+                double price = Double.parseDouble(priceField.getText());
+
+                String query = "UPDATE ksiazki SET tytul =?, autor =?, wydawnictwo =?, cena =? WHERE ID_ksiazki =?";
+                try (Connection connection = DBUtil.getConnection();
+                     PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    preparedStatement.setString(1, title);
+                    preparedStatement.setString(2, author);
+                    preparedStatement.setString(3, publisher);
+                    preparedStatement.setDouble(4, price);
+                    preparedStatement.setInt(5, selectedBook.getId());
+                    preparedStatement.executeUpdate();
+                    loadBooks();
+                    clearTextFields(); // Clear text fields after modifying a book
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            showAlert("All fields must be completed to modify the book.");
         }
     }
 
     @FXML
     public void deleteBook(ActionEvent event) {
         Book selectedBook = bookListView.getSelectionModel().getSelectedItem();
-        if (selectedBook!= null) {
+        if (selectedBook != null) {
             String query = "DELETE FROM ksiazki WHERE ID_ksiazki =?";
             try (Connection connection = DBUtil.getConnection();
                  PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, selectedBook.getId());
                 preparedStatement.executeUpdate();
                 loadBooks();
+                clearTextFields(); // Clear text fields after deleting a book
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void handleBookSelection(Book selectedBook) {
+        if (selectedBook != null) {
+            titleField.setText(selectedBook.getTitle());
+            authorField.setText(selectedBook.getAuthor());
+            publisherField.setText(selectedBook.getPublisher());
+            priceField.setText(Double.toString(selectedBook.getPrice()));
+        }
+    }
+
+    private void clearTextFields() {
+        titleField.clear();
+        authorField.clear();
+        publisherField.clear();
+        priceField.clear();
+    }
+
+    private boolean areFieldsFilled() {
+        return !titleField.getText().isEmpty() &&
+                !authorField.getText().isEmpty() &&
+                !publisherField.getText().isEmpty() &&
+                !priceField.getText().isEmpty();
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Missing data");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    @FXML
+    public void logout() {
+        try {
+            Stage stage = (Stage) bookListView.getScene().getWindow();
+            stage.close(); // Zamknij bieżące okno
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/projekt/views/login.fxml"));
+            Parent root = loader.load();
+            Stage loginStage = new Stage();
+            loginStage.setScene(new Scene(root));
+            loginStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

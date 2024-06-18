@@ -29,7 +29,7 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (isValidCredentials(login, password)) {
-            loadBookstore();
+            // Nie rób nic więcej, bo obsługa przekierowania jest już w isValidCredentials
         } else {
             showAlert("Invalid login or password");
         }
@@ -48,11 +48,14 @@ public class LoginController {
                     // Przekierowanie do panelu administratora
                     loadAdminPanel();
                 } else {
-                    // Wczytanie panelu księgarni
+                    // Przekierowanie do księgarni dla zwykłego użytkownika
                     loadBookstore();
                 }
+                Stage currentStage = (Stage) loginField.getScene().getWindow();
+                currentStage.close();  // Zamknięcie okna logowania po udanym logowaniu
                 return true;
             } else {
+                showAlert("Invalid login or password");
                 return false;
             }
         } catch (Exception e) {
@@ -60,6 +63,7 @@ public class LoginController {
             return false;
         }
     }
+
 
 
     private void loadBookstore() {

@@ -37,6 +37,7 @@
                 <Button fx:id="modifyButton" text="Modify Book" onAction="#modifyBook"/>
                 <Button fx:id="deleteButton" text="Delete Book" onAction="#deleteBook"/>
             </HBox>
+            <Button text="Logout" onAction="#logout"/>
         </VBox>
     </center>
 </BorderPane>

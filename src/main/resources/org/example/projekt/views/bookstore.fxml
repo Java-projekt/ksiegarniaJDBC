@@ -11,6 +11,7 @@
     <children>
         <VBox spacing="10" HBox.hgrow="NEVER">
             <ListView fx:id="recommendedBooksListView" prefWidth="200" />
+            <Button text="Logout" onAction="#logout"/>
         </VBox>
         <VBox spacing="10" HBox.hgrow="ALWAYS">
             <TextField fx:id="searchField" promptText="Search Books" />
