@@ -45,7 +45,12 @@ public class BookstoreController {
 
     private void loadRecommendedBooks() {
         ObservableList<String> books = FXCollections.observableArrayList();
-        String query = "SELECT tytul FROM ksiazki LIMIT 5";
+        String query = "SELECT ks.tytul, COUNT(sz.ID_szczegolu) as liczba_zamowien " +
+                "FROM ksiazki ks " +
+                "JOIN szczegoly_zamowienia sz ON ks.ID_ksiazki = sz.ID_ksiazki " +
+                "GROUP BY ks.tytul " +
+                "ORDER BY liczba_zamowien DESC " +
+                "LIMIT 5";
         try (Connection connection = DBUtil.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
