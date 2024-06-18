@@ -24,6 +24,9 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
 
+    private static int currentUserId;
+
+
     public void login(ActionEvent event) {
         String login = loginField.getText();
         String password = passwordField.getText();
@@ -35,6 +38,10 @@ public class LoginController {
         }
     }
 
+    public static int getCurrentUserId() {
+        return currentUserId;
+    }
+
     private boolean isValidCredentials(String login, String password) {
         String query = "SELECT * FROM klienci WHERE login = ? AND haslo = ?";
         try (Connection connection = DBUtil.getConnection();
@@ -43,6 +50,7 @@ public class LoginController {
             preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                currentUserId = resultSet.getInt("ID_klienta");
                 int userId = resultSet.getInt("ID_klienta");
                 if (userId == 1) {
                     // Przekierowanie do panelu administratora
@@ -102,6 +110,28 @@ public class LoginController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public Client getLoggedInClient(String login, String password) {
+        String query = "SELECT * FROM klienci WHERE login = ? AND haslo = ?";
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, login);
+            preparedStatement.setString(2, password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("ID_klienta");
+                String firstName = resultSet.getString("imie");
+                String lastName = resultSet.getString("nazwisko");
+                String email = resultSet.getString("email");
+                String phoneNumber = resultSet.getString("numer_telefonu");
+                boolean isAdmin = resultSet.getBoolean("admin");
+                return new Client(id, firstName, lastName, email, phoneNumber, login, password, isAdmin);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @FXML

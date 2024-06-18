@@ -17,6 +17,7 @@
             <TextField fx:id="searchField" promptText="Search Books" />
             <Button text="Search" onAction="#searchBooks" />
             <ListView fx:id="searchResultsListView" />
+            <Button text="Order" onAction="#orderSelectedBook" />
         </VBox>
     </children>
     <HBox.margin>

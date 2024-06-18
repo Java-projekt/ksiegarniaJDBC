@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.projekt.controllers.OrderAddressController"
+      alignment="CENTER"
+      spacing="10">
+
+    <Label text="Enter your address details:"/>
+
+    <TextField fx:id="cityField" promptText="City"/>
+
+    <TextField fx:id="postalCodeField" promptText="Postal Code"/>
+
+    <TextField fx:id="buildingNumberField" promptText="Building Number"/>
+
+    <Button text="Place Order" onAction="#placeOrder"/>
+</VBox>

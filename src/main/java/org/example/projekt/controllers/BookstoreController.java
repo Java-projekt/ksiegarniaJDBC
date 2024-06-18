@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -25,9 +26,21 @@ public class BookstoreController {
     @FXML
     private TextField searchField;
 
+    private ObservableList<String> booksList;
+
     @FXML
     public void initialize() {
         loadRecommendedBooks();
+        recommendedBooksListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                searchResultsListView.getSelectionModel().clearSelection();
+            }
+        });
+        searchResultsListView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal != null) {
+                recommendedBooksListView.getSelectionModel().clearSelection();
+            }
+        });
     }
 
     private void loadRecommendedBooks() {
@@ -61,6 +74,44 @@ public class BookstoreController {
             e.printStackTrace();
         }
         searchResultsListView.setItems(books);
+    }
+
+    public void orderSelectedBook() {
+        String selectedBookTitle = recommendedBooksListView.getSelectionModel().getSelectedItem();
+        if (selectedBookTitle == null) {
+            selectedBookTitle = searchResultsListView.getSelectionModel().getSelectedItem();
+        }
+        if (selectedBookTitle == null) {
+            showAlert("Select a book to order.");
+            return;
+        }
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/projekt/views/order.fxml"));
+            Parent root = loader.load();
+
+            OrderAddressController controller = loader.getController();
+            controller.initData(selectedBookTitle);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Order Address");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public ObservableList<String> getBooksList() {
+        return booksList;
     }
 
     public void logout() {
