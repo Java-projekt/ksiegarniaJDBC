@@ -7,20 +7,27 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="org.example.projekt.controllers.BookstoreController" spacing="20">
-    <children>
-        <VBox spacing="10" HBox.hgrow="NEVER">
-            <ListView fx:id="recommendedBooksListView" prefWidth="200" />
-            <Button text="Logout" onAction="#logout"/>
-        </VBox>
-        <VBox spacing="10" HBox.hgrow="ALWAYS">
-            <TextField fx:id="searchField" promptText="Search Books" />
-            <Button text="Search" onAction="#searchBooks" />
-            <ListView fx:id="searchResultsListView" />
-            <Button text="Order" onAction="#orderSelectedBook" />
-        </VBox>
-    </children>
+<?import javafx.scene.control.Label?>
+<HBox prefHeight="700" prefWidth="830" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171"
+      fx:controller="org.example.projekt.controllers.BookstoreController" spacing="20">
     <HBox.margin>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </HBox.margin>
+    <VBox prefWidth="10"><HBox></HBox></VBox>
+    <VBox spacing="10">
+        <HBox minHeight="10"><VBox></VBox></HBox>
+        <Button text="Logout" onAction="#logout"/>
+        <HBox minHeight="100"><VBox></VBox></HBox>
+        <Label text="Bestsellers"/>
+        <ListView fx:id="recommendedBooksListView" prefWidth="300" prefHeight="200"/>
+    </VBox>
+    <VBox spacing="10" alignment="CENTER">
+        <HBox>
+            <TextField fx:id="searchField" promptText="Search Books"/>
+            <HBox minWidth="10"><VBox></VBox></HBox>
+            <Button text="Search" onAction="#searchBooks" styleClass="search"/>
+        </HBox>
+        <ListView fx:id="searchResultsListView" onMouseClicked="#onItemSelected"/>
+        <Button text="Order" onAction="#orderSelectedBook"/>
+    </VBox>
 </HBox>

@@ -81,6 +81,8 @@ public class LoginController {
             Stage stage = new Stage();
             stage.setTitle("Bookstore");
             stage.setScene(new Scene(root));
+            Scene scene = stage.getScene();
+            scene.getStylesheets().add(getClass().getResource("/org/example/projekt/styles/bookstore.css").toExternalForm());
             stage.show();
             Stage currentStage = (Stage) loginField.getScene().getWindow();
             currentStage.close();
@@ -94,8 +96,10 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/projekt/views/admin.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle("Admin Panel");
+            stage.setTitle("Admin panel");
             stage.setScene(new Scene(root));
+            Scene scene = stage.getScene();
+            scene.getStylesheets().add(getClass().getResource("/org/example/projekt/styles/admin.css").toExternalForm());
             stage.show();
             Stage currentStage = (Stage) loginField.getScene().getWindow();
             currentStage.close();
@@ -139,12 +143,14 @@ public class LoginController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/projekt/views/register.fxml"));
             Parent root = loader.load();
-
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            Scene scene = stage.getScene();
+            scene.getStylesheets().add(getClass().getResource("/org/example/projekt/styles/login.css").toExternalForm());
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

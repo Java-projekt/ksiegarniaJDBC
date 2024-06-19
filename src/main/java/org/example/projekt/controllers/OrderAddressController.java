@@ -39,18 +39,21 @@ public class OrderAddressController {
         String postalCode = postalCodeField.getText();
         String buildingNumber = buildingNumberField.getText();
 
+        // Check if any of the fields are empty
+        if (city.isEmpty() || postalCode.isEmpty() || buildingNumber.isEmpty()) {
+            showAlert("Please fill in all address fields.");
+            return; // Exit method if any field is empty
+        }
 
-        // Pobierz ID adresu z bazy danych lub stwórz nowy rekord w tabeli adres
+        // Proceed with address validation and order placement
         int addressId = getAddressId(city, postalCode, buildingNumber);
 
         if (addressId != -1) {
             int clientId = loginController.getCurrentUserId();
-            // Utwórz nowe zamówienie i szczegóły zamówienia
             Order order = new Order(0, clientId, LocalDate.now(), addressId);
             int orderId = saveOrder(order);
 
             if (orderId != -1) {
-                // Pobierz ID książki na podstawie tytułu
                 int bookId = getBookIdByTitle(selectedBookTitle);
 
                 if (bookId != -1) {
@@ -70,6 +73,7 @@ public class OrderAddressController {
             showAlert("Failed to save address.");
         }
     }
+
 
     private int getAddressId(String city, String postalCode, String buildingNumber) {
         String query = "SELECT ID_adresu FROM adres WHERE miejscowosc = ? AND kod_pocztowy = ? AND numer_budynku = ?";

@@ -93,23 +93,46 @@ public class AdminPanelController {
             String publisher = publisherField.getText();
             double price = Double.parseDouble(priceField.getText());
 
-            String query = "INSERT INTO ksiazki (tytul, autor, wydawnictwo, cena) VALUES (?,?,?,?)";
-            try (Connection connection = DBUtil.getConnection();
-                 PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                preparedStatement.setString(1, title);
-                preparedStatement.setString(2, author);
-                preparedStatement.setString(3, publisher);
-                preparedStatement.setDouble(4, price);
-                preparedStatement.executeUpdate();
-                loadBooks();
-                clearTextFields(); // Clear text fields after adding a book
-            } catch (SQLException e) {
-                e.printStackTrace();
+            // Check if the book already exists
+            if (isBookAlreadyExists(title, author, publisher, price)) {
+                showAlert("This book already exists in the database.");
+            } else {
+                String query = "INSERT INTO ksiazki (tytul, autor, wydawnictwo, cena) VALUES (?,?,?,?)";
+                try (Connection connection = DBUtil.getConnection();
+                     PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                    preparedStatement.setString(1, title);
+                    preparedStatement.setString(2, author);
+                    preparedStatement.setString(3, publisher);
+                    preparedStatement.setDouble(4, price);
+                    preparedStatement.executeUpdate();
+                    loadBooks();
+                    clearTextFields(); // Clear text fields after adding a book
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         } else {
             showAlert("All fields must be completed to add a book.");
         }
     }
+
+    private boolean isBookAlreadyExists(String title, String author, String publisher, double price) {
+        String query = "SELECT * FROM ksiazki WHERE tytul = ? AND autor = ? AND wydawnictwo = ? AND cena = ?";
+        try (Connection connection = DBUtil.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, author);
+            preparedStatement.setString(3, publisher);
+            preparedStatement.setDouble(4, price);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                return resultSet.next(); // true if there is any matching book
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     @FXML
     public void modifyBook(ActionEvent event) {
@@ -193,11 +216,13 @@ public class AdminPanelController {
     public void logout() {
         try {
             Stage stage = (Stage) bookListView.getScene().getWindow();
-            stage.close(); // Zamknij bieżące okno
+            stage.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/projekt/views/login.fxml"));
             Parent root = loader.load();
             Stage loginStage = new Stage();
             loginStage.setScene(new Scene(root));
+            Scene loginScene = loginStage.getScene();
+            loginScene.getStylesheets().add(getClass().getResource("/org/example/projekt/styles/login.css").toExternalForm());
             loginStage.show();
         } catch (IOException e) {
             e.printStackTrace();

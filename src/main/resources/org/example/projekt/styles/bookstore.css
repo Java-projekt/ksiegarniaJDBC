@@ -1,0 +1,50 @@
+.root {
+    -fx-background-color: #A2999E;
+}
+.text-field {
+     -fx-background-color: #EEF0F2;
+     -fx-pref-height: 50px;
+     -fx-pref-width: 350px;
+     -fx-max-width: 350px;
+     -fx-text-fill: #A2999E;
+     -fx-border-radius: 30px;
+     -fx-background-radius: 30px;
+     -fx-font-size: 20px;
+ }
+.button {
+    -fx-background-color: #846A6A;
+    -fx-text-fill: #EEF0F2;
+    -fx-font-size: 20px;
+    -fx-pref-width: 100px;
+    -fx-pref-height: 50px;
+    -fx-border-radius: 30px;
+    -fx-background-radius: 30px;
+    -fx-alignment: center;
+}
+.button:hover {
+    -fx-background-color: #C6C7C4;
+    -fx-border-color: #C6C7C4;
+}
+.label {
+    -fx-font-size: 45px;
+    -fx-text-fill: #EEF0F2;
+    -fx-font-weight: 800;
+}
+.list-cell {
+    -fx-background-color: #353B3C;
+    -fx-font-size: 18px;
+    -fx-text-fill: #EEF0F2;
+}
+.list-view {
+    -fx-background-color: #353B3C;
+}
+.list-cell:selected {
+    -fx-background-color: #C6C7C4;
+    -fx-text-fill: #353B3C;
+}
+#recommendedBooksListView {
+    -fx-background-color: #A2999E;
+}
+#recommendedBooksListView .list-cell {
+    -fx-background-color: #A2999E;
+}

@@ -98,8 +98,13 @@ public class BookstoreController {
             OrderAddressController controller = loader.getController();
             controller.initData(selectedBookTitle);
 
+            String css = getClass().getResource("/org/example/projekt/styles/order.css").toExternalForm();
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(css);
+
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
             stage.setTitle("Order Address");
             stage.show();
         } catch (IOException e) {
@@ -115,6 +120,13 @@ public class BookstoreController {
         alert.showAndWait();
     }
 
+    @FXML
+    private void onItemSelected() {
+        // Obsługa zdarzenia po wybraniu elementu w ListView
+        String selectedItem = searchResultsListView.getSelectionModel().getSelectedItem();
+        System.out.println("Wybrano: " + selectedItem);
+    }
+
     public ObservableList<String> getBooksList() {
         return booksList;
     }
@@ -122,11 +134,13 @@ public class BookstoreController {
     public void logout() {
         try {
             Stage stage = (Stage) recommendedBooksListView.getScene().getWindow();
-            stage.close(); // Zamknij bieżące okno
+            stage.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/example/projekt/views/login.fxml"));
             Parent root = loader.load();
             Stage loginStage = new Stage();
             loginStage.setScene(new Scene(root));
+            Scene loginScene = loginStage.getScene();
+            loginScene.getStylesheets().add(getClass().getResource("/org/example/projekt/styles/login.css").toExternalForm());
             loginStage.show();
         } catch (IOException e) {
             e.printStackTrace();
